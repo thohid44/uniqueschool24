@@ -25,18 +25,13 @@ AppBar customAppBar(title) {
         ),
       ),
       actions: [
-        IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.notifications,
-              color: Colors.amber,
-            )),
+      
         IconButton(
             onPressed: () {
            
             },
             icon: Image.asset(
-              "assets/menu_bar.jpeg",
+              "assets/taka.png",
               height: 15.h,
               fit: BoxFit.fitHeight,
             )),

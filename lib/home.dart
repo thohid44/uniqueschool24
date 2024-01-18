@@ -15,13 +15,20 @@ class _HomeState extends State<Home> {
       appBar: AppBar(), 
       body: ListView(
         children: [
-
+ Container(
+  
+ ),
           Container(
+            height: 120.h,
             width: 140,
-            child: Column(
+            child:ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 6,
+              itemBuilder: (context,index){
+              return  Column(
               children: [
                 Container(
-                  height: 120,
+                  height: 100,
                      width: 140,
                   decoration: BoxDecoration(
                     color: Color(0xffD8C9FE)
@@ -34,7 +41,8 @@ class _HomeState extends State<Home> {
                   ),
                 )
               ],
-            ),
+            );
+            })
           )
         ],
       ),

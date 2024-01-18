@@ -1,45 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uniqueschool2024/school/team_page.dart';
 
 
 
-class MyGridView extends StatelessWidget {
+class CategoriesPage extends StatelessWidget {
         
-  List<Map<String,dynamic>> itemList  = [
-{
-  "title":"SSC",
-  "image":"assets/blob.png"
-},
-{
-  "title":"HSC",
-  "image":"assets/blob.png"
-},
-{
-  "title":"Honors",
-  "image":"assets/blob.png"
-},
-{
-  "title":"Admission",
-  "image":"assets/blob.png"
-},
-{
-  "title":"Job",
-  "image":"assets/blob.png"
-},
-{
-  "title":"Exam",
-  "image":"assets/blob.png"
-},
-{
-  "title":"Tutor",
-  "image":"assets/blob.png"
-},
-{
-  "title":"Team",
-  "image":"assets/blob.png"
-}
-  ];
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,37 +49,42 @@ class MyGridView extends StatelessWidget {
   ),  
 
    SizedBox(height: 25.h,),
-       Row(
+    const   Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            GridItem(imageUrl: "${itemList[0]['image']}", text: '${itemList[0]['title']}'),
-             GridItem(imageUrl: "${itemList[0]['image']}", text: '${itemList[0]['title']}'),
+            GridItem(imageUrl: "assets/ssc.png", text: 'SSC'),
+             GridItem(imageUrl: "assets/category/hsc.png", text: 'HSC'),
           ],
         ),
         SizedBox(height: 15.h,),
-         Row(
+       
+       const     Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            GridItem(imageUrl: "${itemList[0]['image']}", text: '${itemList[0]['title']}'),
-             GridItem(imageUrl: "${itemList[0]['image']}", text: '${itemList[0]['title']}'),
+            GridItem(imageUrl: "assets/category/honors.png", text: 'Honors'),
+             GridItem(imageUrl: 'assets/category/admission.png',text: "Admission"),
+          ],
+        ),
+         SizedBox(height: 15.h,),
+      const    Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            GridItem(imageUrl: "assets/category/job.png", text: 'Job'),
+             GridItem(imageUrl: 'assets/exam.png',text: "Exam"),
           ],
         ),
          SizedBox(height: 15.h,),
          Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            GridItem(imageUrl: "${itemList[0]['image']}", text: '${itemList[0]['title']}'),
-             GridItem(imageUrl: "${itemList[0]['image']}", text: '${itemList[0]['title']}'),
+        const    GridItem(imageUrl: "assets/category/tutor.png", text: 'Tutor'),
+             InkWell(
+              onTap: (){
+Get.to(TeamPage());
+              },
+              child: GridItem(imageUrl: 'assets/category/team.png', text:'Team' )),
           ],
         ),
-         SizedBox(height: 15.h,),
-         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            GridItem(imageUrl: "${itemList[0]['image']}", text: '${itemList[0]['title']}'),
-             GridItem(imageUrl: "${itemList[0]['image']}", text: '${itemList[0]['title']}'),
-          ],
-        )
         ],
       ),
     );
@@ -128,7 +103,7 @@ class GridItem extends StatelessWidget {
       height: 100.h,
       width: 120.w,
       decoration: BoxDecoration(
-        color: Colors.amber
+      
       ),
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

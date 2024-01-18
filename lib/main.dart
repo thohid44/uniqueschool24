@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'package:uniqueschool2024/Pages/categories_page.dart';
-
+import 'package:uniqueschool2024/home.dart';
 
 
 void main() {
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
       builder: (_ , child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'First Method',
+          title: 'Unique-E-School',
           // You can use the library anywhere in the app even in theme
           theme: ThemeData(
             primarySwatch: Colors.blue,
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child:  CategoriesPage()
+      child:  Home()
     );
   }
 }
