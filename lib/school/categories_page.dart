@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uniqueschool2024/Pages/Exam/view/all_exam_page.dart';
 import 'package:uniqueschool2024/school/team_page.dart';
 
 
@@ -66,13 +67,18 @@ class CategoriesPage extends StatelessWidget {
           ],
         ),
          SizedBox(height: 15.h,),
-      const    Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            GridItem(imageUrl: "assets/category/job.png", text: 'Job'),
-             GridItem(imageUrl: 'assets/exam.png',text: "Exam"),
-          ],
-        ),
+          InkWell(
+            onTap: (){
+            Get.to(AllExamPage());
+            },
+            child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              GridItem(imageUrl: "assets/category/job.png", text: 'Job'),
+               GridItem(imageUrl: 'assets/exam.png',text: "Exam"),
+            ],
+                    ),
+          ),
          SizedBox(height: 15.h,),
          Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
