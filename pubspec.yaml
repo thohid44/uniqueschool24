@@ -43,7 +43,7 @@ flutter:
   assets:
     - assets/ 
     - assets/category/
-    - assets/user.jpg
+    - assets/user.jpg 
     - assets/lb.png
   #   - images/a_dot_ham.jpeg
 

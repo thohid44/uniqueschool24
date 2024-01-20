@@ -117,7 +117,85 @@ actions: [
                         ),
                       ),
                     );
-                  }))
+                  })),
+
+                    Container(
+          margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+              width: 300.w, 
+            
+              decoration: BoxDecoration(
+                gradient:const LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                       Color(0xff537EC4),
+                  Color(0xffD8C9FE),
+                
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(10.r), // Adjust the border radius as needed
+              ),
+              child:Row(
+                children: [ 
+                  Container(
+                    width: 250.w,
+                    child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset("assets/scholarship.png"),
+                          SizedBox(width: 5.w,),
+                          Text(
+                        'Join as a Tutor & Hire Tutor',
+                        style: GoogleFonts.publicSans(
+                          color: Colors.white, 
+                          fontSize: 15.sp, 
+                           fontWeight: FontWeight.w500
+                        ),
+                      ),
+                        ],
+                      ),
+                       Container(
+                        alignment: Alignment.centerLeft,
+                         child: Text(
+                          'Easily create and share \nyour own awesome portfolio',
+                          style: GoogleFonts.roboto(
+                            color: Colors.white, 
+                            fontSize: 12.sp, 
+                            fontWeight: FontWeight.w500
+                          ),
+                          textAlign: TextAlign.left,
+                                               ),
+                       ),
+
+                       Container(
+                        width: 80.w,
+                        height: 35.h,
+                        decoration: BoxDecoration(
+                          color: Color(0xffDB3A3C)
+                        ),
+                      
+                        child: Text(
+                          '  Apply as Tutor',
+                          style: GoogleFonts.publicSans(
+                            color: Colors.white, 
+                            fontSize: 12.sp, 
+                            fontWeight: FontWeight.w500
+                          ),
+                          textAlign: TextAlign.left,
+                                               ),
+                       )
+                    ],
+                    ),
+                  ), 
+
+                  Container(
+                    width: 50.w,
+                    child: Image.asset("assets/girl.png"))
+                ],
+              )
+            ),
         ],
       ),
       bottomNavigationBar: Container(
