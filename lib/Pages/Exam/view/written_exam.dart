@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uniqueschool2024/Pages/Exam/view/exam_start_page.dart';
+import 'package:uniqueschool2024/Pages/QuizExam/view/exam_start_page.dart';
 import 'package:uniqueschool2024/widgets/app_bar.dart';
 
-class AllExamPage extends StatefulWidget {
-  const AllExamPage({super.key});
+class WrittenExamPage extends StatefulWidget {
+  const WrittenExamPage({super.key});
 
   @override
-  State<AllExamPage> createState() => _AllExamPageState();
+  State<WrittenExamPage> createState() => _WrittenExamPageState();
 }
 
-class _AllExamPageState extends State<AllExamPage> {
+class _WrittenExamPageState extends State<WrittenExamPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: customAppBar("Exam", (){
+      appBar: customAppBar("Written Exam", (){
 
       }),
       body: ListView(
