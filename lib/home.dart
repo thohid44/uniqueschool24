@@ -47,8 +47,75 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
+      drawer: ListView(
+        children: [
+          Text("data")
+        ],
+      ),
       body: ListView(
         children: [
+
+          Container(
+            alignment: Alignment.center,
+            height: 200.h,
+            width: 300.w,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage("assets/home_bg.png"),
+              
+              fit: BoxFit.fill
+              )
+            ),
+            child:
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: 100.h,
+                        width: 150.w,
+                      ),
+                      Container(
+                            height: 100.h,
+                        width: 150.w,
+                         alignment: Alignment.center,
+                        child: Text("Start Learning",
+                        style:GoogleFonts.inter(
+                          fontSize: 30.sp, 
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                        )),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 5.h,),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15.w),
+                    decoration: BoxDecoration(
+                     
+                    ),
+                    child: TextFormField( 
+                  
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        contentPadding: EdgeInsets.all(3.h),
+                     hintText: "Search Courses here ",
+                     hintStyle: GoogleFonts.inter(
+                      color: Colors.grey
+                     ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.r)
+                      ),
+                     prefixIcon: Icon(Icons.search)
+                      ),
+                      
+                    ),
+                  ),
+                ],
+              ),
+            
+          ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10.w),
             child: Row(
