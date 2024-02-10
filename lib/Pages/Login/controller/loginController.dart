@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:uniqueschool2024/Util/Localstorekey.dart';
 import 'package:uniqueschool2024/Util/app_constant.dart';
+import 'package:uniqueschool2024/home.dart';
 
 class LoginController extends GetxController {
   var isLoading = false.obs;
@@ -13,28 +16,38 @@ class LoginController extends GetxController {
   final _box = GetStorage();
   var userClient = http.Client();
   var url = AppConstants.baseUrl;
-
-  login(email, password) async {
+  var email = ''.obs; 
+  var password =''.obs;
+  login() async {
     try {
-      var mapData = {"email": email, "password": password};
+      var mapData = {"login": email.value.toString(), "password": password.value.toString()};
 
-      isLoading(true);
-      var response = await http.post(Uri.parse(url), body: mapData);
+      isLogLoading(true);
+      var response = await http.post(Uri.parse("${url}auth/login"), body: mapData);
       print("${response.statusCode}");
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 202) {
         var jsonData = jsonDecode(response.body);
         print(jsonData);
-        var getToken = jsonData['access_token'];
-
+        var getToken = jsonData['token'];
+print(getToken);
         print(_box.read(LocalStoreKey.token));
 
-        if (getToken != null) {}
+        if (getToken != null) {
+          Get.offAll(Home());
+        }
+      }
+       if (response.statusCode == 401) {
+      
+Fluttertoast.showToast(msg: "Mobile number or Password not match",
+gravity: ToastGravity.CENTER,
+backgroundColor: Colors.red);
+        
       }
 
-      isLoading(false);
+      isLogLoading(false);
     } catch (e) {
-      isLoading(false);
+      isLogLoading(false);
       print("Error $e");
     }
   }
@@ -150,10 +163,7 @@ class LoginController extends GetxController {
   //   }
   // }
 
-  var currentPassword = ''.obs;
-  var password = ''.obs;
-  var confirmPassword = ''.obs;
-  var isChangeLoading = false.obs;
+
 
   // changePassword() async {
   //   var token = _box.read(LocalStoreKey.token);

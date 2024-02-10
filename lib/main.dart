@@ -9,6 +9,8 @@ import 'package:uniqueschool2024/Util/Localstorekey.dart';
 import 'package:uniqueschool2024/home.dart';
 import 'package:uniqueschool2024/splash_screen.dart';
 
+import 'Pages/Login/view/login_page.dart';
+
 
 void main() async{
     await GetStorage.init();
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Unique-E-School',
-          // You can use the library anywhere in the app even in theme
+        
           theme: ThemeData(
             primarySwatch: Colors.blue,
         //    textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
@@ -37,8 +39,8 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-     child: Home(),
-     // child:  checkUserType() ? Home() : SplashScreen(),
+     //child: Home(),
+     child:  checkUserType() ? Home() : LoginPage(),
     );
   }
 }

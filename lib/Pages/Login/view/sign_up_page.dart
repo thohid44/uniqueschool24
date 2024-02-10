@@ -7,14 +7,14 @@ import 'package:uniqueschool2024/Pages/Login/controller/loginController.dart';
 
 import 'package:uniqueschool2024/Pages/profile/profile_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
 
   var loginCon = Get.put(LoginController());
   @override
