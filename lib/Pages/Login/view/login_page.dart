@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uniqueschool2024/Pages/Login/controller/loginController.dart';
 
-import 'package:uniqueschool2024/Pages/profile/profile_page.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 40.h,
                   child: TextFormField(
                     decoration: InputDecoration(
-                      label: Text("Mobile Number/Email"),
+                      label: Text("Mobile Number"),
                     ),
                   onChanged: (value){
 loginCon.email.value = value;

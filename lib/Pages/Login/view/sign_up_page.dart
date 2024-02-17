@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uniqueschool2024/Pages/Login/controller/loginController.dart';
 
-import 'package:uniqueschool2024/Pages/profile/profile_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -74,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 40.h,
                   child: TextFormField(
                     decoration: InputDecoration(
-                      label: Text("Mobile Number/Email"),
+                      label: Text("Mobile Number"),
                     ),
                   onChanged: (value){
 loginCon.email.value = value;
@@ -187,7 +186,7 @@ backgroundColor: Colors.red);
                         color: Color(0xff5e5e5e)),
                   ),
                   TextSpan(
-                    text: " Sign up",
+                    text: "Sign up",
                     style: GoogleFonts.publicSans(
                         fontSize: 13.sp,
                         fontWeight: FontWeight.w600,

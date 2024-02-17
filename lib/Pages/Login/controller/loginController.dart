@@ -7,7 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:uniqueschool2024/Util/Localstorekey.dart';
 import 'package:uniqueschool2024/Util/app_constant.dart';
-import 'package:uniqueschool2024/home.dart';
+import 'package:uniqueschool2024/Pages/Home/views/home.dart';
 
 class LoginController extends GetxController {
   var isLoading = false.obs;
@@ -16,33 +16,37 @@ class LoginController extends GetxController {
   final _box = GetStorage();
   var userClient = http.Client();
   var url = AppConstants.baseUrl;
-  var email = ''.obs; 
-  var password =''.obs;
+  var email = ''.obs;
+  var password = ''.obs;
   login() async {
     try {
-      var mapData = {"login": email.value.toString(), "password": password.value.toString()};
+      var mapData = {
+        "login": email.value.toString(),
+        "password": password.value.toString()
+      };
 
       isLogLoading(true);
-      var response = await http.post(Uri.parse("${url}auth/login"), body: mapData);
+      var response =
+          await http.post(Uri.parse("${url}auth/login"), body: mapData);
       print("${response.statusCode}");
 
       if (response.statusCode == 202) {
         var jsonData = jsonDecode(response.body);
         print(jsonData);
         var getToken = jsonData['token'];
-print(getToken);
+        _box.write(LocalStoreKey.token, getToken);
+        print(getToken);
         print(_box.read(LocalStoreKey.token));
 
         if (getToken != null) {
           Get.offAll(Home());
         }
       }
-       if (response.statusCode == 401) {
-      
-Fluttertoast.showToast(msg: "Mobile number or Password not match",
-gravity: ToastGravity.CENTER,
-backgroundColor: Colors.red);
-        
+      if (response.statusCode == 401) {
+        Fluttertoast.showToast(
+            msg: "Mobile number or Password not match",
+            gravity: ToastGravity.CENTER,
+            backgroundColor: Colors.red);
       }
 
       isLogLoading(false);
@@ -162,8 +166,6 @@ backgroundColor: Colors.red);
   //     print("Error $e");
   //   }
   // }
-
-
 
   // changePassword() async {
   //   var token = _box.read(LocalStoreKey.token);

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uniqueschool2024/Pages/Home/controller/class_list_controller.dart';
 import 'package:uniqueschool2024/Pages/nav_page/more_setting_page.dart';
 import 'package:uniqueschool2024/Pages/profile/profile_page.dart';
 import 'package:uniqueschool2024/Util/color.dart';
 
-import 'school/categories_page.dart';
+import '../../../school/categories_page.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,8 +17,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var classController = Get.put(ClassListController());
+
   @override
   Widget build(BuildContext context) {
+    classController.getClassList();
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
@@ -48,73 +52,58 @@ class _HomeState extends State<Home> {
         ],
       ),
       drawer: ListView(
-        children: [
-          Text("data")
-        ],
+        children: [Text("data")],
       ),
       body: ListView(
         children: [
-
           Container(
             alignment: Alignment.center,
             height: 200.h,
             width: 300.w,
             decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage("assets/home_bg.png"),
-              
-              fit: BoxFit.fill
-              )
-            ),
-            child:
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        height: 100.h,
-                        width: 150.w,
-                      ),
-                      Container(
-                            height: 100.h,
-                        width: 150.w,
-                         alignment: Alignment.center,
-                        child: Text("Start Learning",
-                        style:GoogleFonts.inter(
-                          fontSize: 30.sp, 
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold
-                        )),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 5.h,),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 15.w),
-                    decoration: BoxDecoration(
-                     
+                image: DecorationImage(
+                    image: AssetImage("assets/home_bg.png"), fit: BoxFit.fill)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      height: 100.h,
+                      width: 150.w,
                     ),
-                    child: TextFormField( 
-                  
-                      decoration: InputDecoration(
+                    Container(
+                      height: 100.h,
+                      width: 150.w,
+                      alignment: Alignment.center,
+                      child: Text("Start Learning",
+                          style: GoogleFonts.inter(
+                              fontSize: 30.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 15.w),
+                  decoration: BoxDecoration(),
+                  child: TextFormField(
+                    decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
                         contentPadding: EdgeInsets.all(3.h),
-                     hintText: "Search Courses here ",
-                     hintStyle: GoogleFonts.inter(
-                      color: Colors.grey
-                     ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r)
-                      ),
-                     prefixIcon: Icon(Icons.search)
-                      ),
-                      
-                    ),
+                        hintText: "Search Courses here ",
+                        hintStyle: GoogleFonts.inter(color: Colors.grey),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r)),
+                        prefixIcon: Icon(Icons.search)),
                   ),
-                ],
-              ),
-            
+                ),
+              ],
+            ),
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10.w),
@@ -150,9 +139,9 @@ class _HomeState extends State<Home> {
           Container(
               height: 100.h,
               width: 140,
-              child: ListView.builder(
+              child: Obx(() => classController.isLoading.value ==false?ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 6,
+                  itemCount: classController.classList.length,
                   itemBuilder: (context, index) {
                     return Container(
                       margin: EdgeInsets.all(10.h),
@@ -188,7 +177,9 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     );
-                  })),
+                  }):Center(child: CircularProgressIndicator(),))
+                  
+                  ),
           Container(
               margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
@@ -300,175 +291,183 @@ class _HomeState extends State<Home> {
                   fontWeight: FontWeight.w700),
             ),
           ),
-            SizedBox(
+          SizedBox(
             height: 10.h,
           ),
-
           Container(
-
-               height: 145.h,
-                 
+            height: 145.h,
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-              itemCount: 5,
-              itemBuilder: (context,index)
-            
-                     
-               { 
-                    return      UnconstrainedBox(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal:5.w),
-                    width: 140.w,
-                    height: 143.h,
-                 
-                    decoration: BoxDecoration(color: Color(0xffD8C9FE),
-                borderRadius: BorderRadius.circular(15.r)
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/u.png"),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Hossain Zisad',
-                            style: GoogleFonts.publicSans(
-                                color: Colors.black,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w500),
-                            textAlign: TextAlign.left,
+                scrollDirection: Axis.horizontal,
+                physics: BouncingScrollPhysics(),
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return UnconstrainedBox(
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 5.w),
+                      width: 140.w,
+                      height: 143.h,
+                      decoration: BoxDecoration(
+                          color: Color(0xffD8C9FE),
+                          borderRadius: BorderRadius.circular(15.r)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset("assets/u.png"),
+                          SizedBox(
+                            width: 5.w,
                           ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'English',
-                            style: GoogleFonts.publicSans(
-                                color: Colors.black,
-                                fontSize: 11.sp,
-                                fontWeight: FontWeight.w500),
-                            textAlign: TextAlign.left,
+                          Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Hossain Zisad',
+                              style: GoogleFonts.publicSans(
+                                  color: Colors.black,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500),
+                              textAlign: TextAlign.left,
+                            ),
                           ),
-                        ),
+                          Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'English',
+                              style: GoogleFonts.publicSans(
+                                  color: Colors.black,
+                                  fontSize: 11.sp,
+                                  fontWeight: FontWeight.w500),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.person, size: 25, color: Colors.white,),
-                              SizedBox(width: 10.w,),
-                              Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                '1500',
-                                style: GoogleFonts.publicSans(
-                                    color: Colors.white,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w700),
-                                textAlign: TextAlign.left,
+                              Icon(
+                                Icons.person,
+                                size: 25,
+                                color: Colors.white,
                               ),
-                                                ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  '1500',
+                                  style: GoogleFonts.publicSans(
+                                      color: Colors.white,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w700),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
                             ],
                           ),
                           Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.star_outline, color: Colors.yellow,),
-                               Icon(Icons.star_outline, color: Colors.yellow,),
-                                Icon(Icons.star_outline, color: Colors.yellow,),
+                              Icon(
+                                Icons.star_outline,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star_outline,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star_outline,
+                                color: Colors.yellow,
+                              ),
                             ],
                           )
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }
+                  );
+                }),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 20.w),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Meet Our Team',
+              style: GoogleFonts.publicSans(
+                  color: Color(0xff364356),
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w700),
+              textAlign: TextAlign.left,
             ),
           ),
-          SizedBox(height: 10.h,),
-  Container(
-    margin: EdgeInsets.only(left: 20.w),
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Meet Our Team',
-                            style: GoogleFonts.publicSans(
-                                color: Color(0xff364356),
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w700),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-          SizedBox(height: 10.h,),
-           Container(
-
-               height: 145.h,
-                 
+          SizedBox(
+            height: 10.h,
+          ),
+          Container(
+            height: 145.h,
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-              itemCount: 5,
-              itemBuilder: (context,index)
-            
-                     
-               { 
-                    return      UnconstrainedBox(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal:5.w),
-                    width: 140.w,
-                    height: 143.h,
-                 
-                    decoration: BoxDecoration(color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(15.r)
+                scrollDirection: Axis.horizontal,
+                physics: BouncingScrollPhysics(),
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return UnconstrainedBox(
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 5.w),
+                      width: 140.w,
+                      height: 143.h,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                          borderRadius: BorderRadius.circular(15.r)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              height: 100.w,
+                              width: 90.w,
+                              padding: EdgeInsets.all(10.h),
+                              decoration: BoxDecoration(
+                                  color: Color(0xffD8C9FE),
+                                  borderRadius: BorderRadius.circular(15.r)),
+                              child: Image.asset(
+                                "assets/user.jpg",
+                                height: 50.w,
+                                width: 50.w,
+                                fit: BoxFit.contain,
+                              )),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Hossain Zisad',
+                              style: GoogleFonts.exo(
+                                  color: Colors.black,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'CEO & Instructor',
+                              style: GoogleFonts.roboto(
+                                  color: Colors.black,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w500),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 100.w,
-                          width: 90.w,
-                          padding: EdgeInsets.all(10.h),
-                          decoration: BoxDecoration(
-                    color:       Color(0xffD8C9FE),
-                      borderRadius: BorderRadius.circular(15.r)
-                          ),
-                          child: Image.asset("assets/user.jpg",   height: 50.w,
-                          width: 50.w, fit: BoxFit.contain,)),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Hossain Zisad',
-                            style: GoogleFonts.exo(
-                                color: Colors.black,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w600),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'CEO & Instructor',
-                            style: GoogleFonts.roboto(
-                                color: Colors.black,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w500),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                        
-                      ],
-                    ),
-                  ),
-                );
-              }
-            ),
+                  );
+                }),
           ),
-          SizedBox(height: 15.h,),
+          SizedBox(
+            height: 15.h,
+          ),
         ],
       ),
       bottomNavigationBar: Container(

@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:uniqueschool2024/Util/Localstorekey.dart';
 
-import 'package:uniqueschool2024/home.dart';
-import 'package:uniqueschool2024/splash_screen.dart';
+import 'package:uniqueschool2024/Pages/Home/views/home.dart';
+
 
 import 'Pages/Login/view/login_page.dart';
 

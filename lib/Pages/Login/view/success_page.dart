@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uniqueschool2024/home.dart';
+import 'package:uniqueschool2024/Pages/Home/views/home.dart';
 
 class LoginSuccessPage extends StatefulWidget {
   const LoginSuccessPage({super.key});
