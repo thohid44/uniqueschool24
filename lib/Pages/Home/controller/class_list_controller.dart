@@ -14,10 +14,12 @@ class ClassListController extends GetxController {
   List<ClassCategory> classList = <ClassCategory>[].obs;
 
   getClassList() async {
+    
     var token = _box.read(LocalStoreKey.token);
     try {
       isLoading(true);
       var response = await http.get(Uri.parse("${url}class"),
+
           headers: {'Authorization': "Bearer $token"});
 
       var jsonData = jsonDecode(response.body);
