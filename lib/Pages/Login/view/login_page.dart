@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uniqueschool2024/Pages/Home/views/home.dart';
 import 'package:uniqueschool2024/Pages/Login/controller/loginController.dart';
 
 
@@ -113,7 +114,8 @@ Fluttertoast.showToast(msg: "Password field is required",
 gravity: ToastGravity.CENTER,
 backgroundColor: Colors.red);
                  }else{
-                  loginCon.login();
+               //   loginCon.login();
+                      Get.offAll(Home());
                  }
                   },
                   child: Container(

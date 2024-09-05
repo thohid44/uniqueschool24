@@ -170,7 +170,7 @@ class _HomeState extends State<Home> {
                               height: 5.h,
                             ),
                             Text(
-                              "SSC",
+                              "${classController.classList[index].name}",
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -362,7 +362,7 @@ class _HomeState extends State<Home> {
                               ),
                             ],
                           ),
-                          Row(
+                      const    Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
