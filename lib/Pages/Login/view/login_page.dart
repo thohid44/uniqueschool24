@@ -5,8 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uniqueschool2024/Pages/Home/views/home.dart';
 import 'package:uniqueschool2024/Pages/Login/controller/loginController.dart';
-
-
+import 'package:uniqueschool2024/Pages/Login/view/sign_up_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,7 +15,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   var loginCon = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
@@ -77,9 +75,9 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       label: Text("Mobile Number"),
                     ),
-                  onChanged: (value){
-loginCon.email.value = value;
-                  },
+                    onChanged: (value) {
+                      loginCon.phone.value = value;
+                    },
                   ),
                 ),
                 SizedBox(
@@ -92,74 +90,74 @@ loginCon.email.value = value;
                     decoration: InputDecoration(
                       label: Text("Password"),
                     ),
-                     onChanged: (value){
-loginCon.password.value = value;
-                  },
+                    onChanged: (value) {
+                      loginCon.password.value = value;
+                    },
                   ),
                 ),
                 SizedBox(
                   height: 25.h,
                 ),
-              Obx(() => loginCon.isLogLoading.value==false?
-                InkWell(
-                  onTap: () {
-                 if(loginCon.email.value.isEmpty){
-Fluttertoast.showToast(msg: "Mobile number field is required",
-
-gravity: ToastGravity.CENTER,
-backgroundColor: Colors.red
-);
-                 }else if(loginCon.password.value.isEmpty){
-Fluttertoast.showToast(msg: "Password field is required",
-gravity: ToastGravity.CENTER,
-backgroundColor: Colors.red);
-                 }else{
-               //   loginCon.login();
-                      Get.offAll(Home());
-                 }
-                  },
-                  child: Container(
-                    width: 200.w,
-                    height: 40.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      gradient: const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color(0xFF844FFC),
-                          Color(0xFF491EB8),
-                        ],
-                        stops: [0.1357, 0.9835],
-                        transform: GradientRotation(200.42),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 30.w),
-                          child: Text(
-                            'LOGIN',
-                            style: GoogleFonts.publicSans(
-                              color: Colors.white,
-                              fontSize: 17.sp,
-                              fontWeight: FontWeight.w600,
+                Obx(() => loginCon.isLogLoading.value == false
+                    ? InkWell(
+                        onTap: () {
+                          if (loginCon.phone.value.isEmpty) {
+                            Fluttertoast.showToast(
+                                msg: "Mobile number field is required",
+                                gravity: ToastGravity.CENTER,
+                                backgroundColor: Colors.red);
+                          } else if (loginCon.password.value.isEmpty) {
+                            Fluttertoast.showToast(
+                                msg: "Password field is required",
+                                gravity: ToastGravity.CENTER,
+                                backgroundColor: Colors.red);
+                          } else {
+                            loginCon.login();
+                          }
+                        },
+                        child: Container(
+                          width: 200.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            gradient: const LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color(0xFF844FFC),
+                                Color(0xFF491EB8),
+                              ],
+                              stops: [0.1357, 0.9835],
+                              transform: GradientRotation(200.42),
                             ),
                           ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(left: 30.w),
+                                child: Text(
+                                  'LOGIN',
+                                  style: GoogleFonts.publicSans(
+                                    color: Colors.white,
+                                    fontSize: 17.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 25.w,
+                              ),
+                              Icon(
+                                Icons.arrow_forward,
+                                color: Colors.white,
+                                size: 25.w,
+                              ),
+                            ],
+                          ),
                         ),
-                        SizedBox(
-                          width: 25.w,
-                        ),
-                        Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                          size: 25.w,
-                        ),
-                      ],
-                    ),
-                  ),
-                ):Center(child: CircularProgressIndicator())),
+                      )
+                    : Center(child: CircularProgressIndicator())),
                 SizedBox(
                   height: 25.h,
                 ),
@@ -179,23 +177,37 @@ backgroundColor: Colors.red);
                 SizedBox(
                   height: 35.h,
                 ),
-                RichText(
-                    text: TextSpan(children: [
-                  TextSpan(
-                    text: "Don’t have an account?",
-                    style: GoogleFonts.publicSans(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xff5e5e5e)),
-                  ),
-                  TextSpan(
-                    text: " Sign up",
-                    style: GoogleFonts.publicSans(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xfff49639)),
-                  ),
-                ]))
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Text(
+                        "Don’t have an account?",
+                        style: GoogleFonts.publicSans(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff5e5e5e)),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 3.w,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.to(SignUpPage());
+                      },
+                      child: Container(
+                        child: Text(
+                          "Sign up",
+                          style: GoogleFonts.publicSans(
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xff5e5e5e)),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
           ),

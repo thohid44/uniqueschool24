@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uniqueschool2024/Pages/Home/controller/class_list_controller.dart';
+import 'package:uniqueschool2024/Pages/Home/views/left_drawer.dart';
 import 'package:uniqueschool2024/Pages/nav_page/more_setting_page.dart';
 import 'package:uniqueschool2024/Pages/profile/profile_page.dart';
 import 'package:uniqueschool2024/Util/color.dart';
@@ -23,12 +24,15 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     classController.getClassList();
     return SafeArea(
+    
         child: Scaffold(
+          
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset("assets/logo.png"),
-        ),
+        // leading: Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Image.asset("assets/logo.png"),
+        // ),
+        
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -51,9 +55,7 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      drawer: ListView(
-        children: [Text("data")],
-      ),
+       drawer:CustomDrawer(), 
       body: ListView(
         children: [
           Container(
