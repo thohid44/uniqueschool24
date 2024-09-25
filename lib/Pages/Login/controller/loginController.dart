@@ -29,17 +29,21 @@ class LoginController extends GetxController {
 
   login() async {
     try {
-      var mapData = {
-        "phone": phone.value.toString(),
-        "password": password.value.toString()
+      // var mapData = {
+      //   "phone": phone.value.toString(),
+      //   "password": password.value.toString()
+      // };
+      
+ var mapData = {
+        "phone":"01607762113",
+        "password":"546311"
       };
-
       isLogLoading(true);
       var response =
-          await http.post(Uri.parse("${url}student/login"), body: mapData);
+          await http.post(Uri.parse("${url}login"), body: mapData);
       print("${response.statusCode}");
       var jsonData = jsonDecode(response.body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200) { 
         print(jsonData);
         var getToken = jsonData['access_token'];
         _box.write(LocalStoreKey.token, getToken);
@@ -70,7 +74,7 @@ class LoginController extends GetxController {
 
       isLogLoading(true);
       var response =
-          await http.post(Uri.parse("${url}student/logout"),);
+          await http.post(Uri.parse("${url}logout"),);
       print("${response.statusCode}");
       var jsonData = jsonDecode(response.body);
       if (response.statusCode == 200) {
@@ -112,7 +116,7 @@ class LoginController extends GetxController {
       };
       print(mapData);
       isRegLoading(true);
-      var response = await http.post(Uri.parse("${url}student/registration"),
+      var response = await http.post(Uri.parse("${url}registration"),
           body: mapData);
 
       if (response.statusCode == 200) {

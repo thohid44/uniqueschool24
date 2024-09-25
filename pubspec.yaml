@@ -7,9 +7,9 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
  
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: '>=3.0.5 <4.0.0'
 
-dependencies:
+dependencies: 
   flutter:
     sdk: flutter
 
@@ -22,12 +22,18 @@ dependencies:
   get: ^4.6.6
   get_storage: ^2.1.1
   fluttertoast: ^8.2.4
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
  
-   
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/img/logo.png"
+  min_sdk_android: 21
+
   flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
@@ -44,6 +50,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/ 
+    - assets/img/logo.png
     - assets/category/ 
     - assets/user.jpg 
     - assets/lb.png

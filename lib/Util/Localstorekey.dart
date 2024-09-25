@@ -3,8 +3,5 @@ class LocalStoreKey {
 
   static const token = "TOKEN";
 
-  
-
-
   static const logo = "Logo";
 }

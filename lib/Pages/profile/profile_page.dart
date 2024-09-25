@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uniqueschool2024/Pages/course/view/buy_course_list_view.dart';
 import 'package:uniqueschool2024/Pages/profile/edit_profile_page.dart';
-import 'package:uniqueschool2024/Pages/profile/profile_course_page.dart';
+
 import 'package:uniqueschool2024/widgets/app_bar.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -72,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ProfileCoursePage()));
+                            builder: (context) => BuyCourseListView()));
                   },
                 ),
                 ProfileItem(
