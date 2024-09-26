@@ -16,7 +16,7 @@ class _TeamPageState extends State<TeamPage> {
   Widget build(BuildContext context) {
 return   SafeArea(
       child: Scaffold(
-        appBar: customAppBar("Team"),
+   //     appBar: customAppBar("Team"),
         body: ListView.builder(
           itemCount: 6,
         itemBuilder: (context,index){

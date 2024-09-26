@@ -10,22 +10,51 @@ import 'package:uniqueschool2024/Util/app_constant.dart';
 
 class CourseOrderedListController extends GetxController {
   var isLoading = false.obs;
-
+  var isLactureLoading = false.obs;
   var _box = GetStorage();
 
   void onInit() {
     super.onInit();
     getCourseOrder();
+  
   }
 
   CourseLectureNoteModel? courseLectureNoteModel;
 
   CourseOrderListModel? courseOrderListModel;
 
+  // getCourseOrderLac() async {
+  //   var token = _box.read(LocalStoreKey.token);
+  //   try {
+  //     var mapData = {"course_id": '4'};
+  //     isLoading(true);
+  //     var response = await http.post(
+  //         Uri.parse(
+  //             "${AppConstants.baseUrl}${AppConstants.courseOrderlecture}"),
+  //         headers: {
+  //           'Accept': 'application/json',
+  //           'Authorization': 'Bearer ' + token,
+  //         },
+  //         body: mapData);
+  //     print("response ${response}");
+  //     print(response.statusCode);
+  //     var jsonData = jsonDecode(response.body);
+  //     if (response.statusCode == 200) {
+  //       print(jsonData);
+
+  //       isLoading(false);
+  //     }
+  //     isLoading(false);
+  //   } catch (e) {
+  //     isLoading(false);
+  //     print("Error: $e");
+  //   }
+  // }
+
   getCourseOrder() async {
     var token = _box.read(LocalStoreKey.token);
     try {
-       isLoading(true);
+      isLoading(true);
       var response = await http.get(
           Uri.parse("${AppConstants.baseUrl}${AppConstants.courseOrderlist}"),
           headers: {
@@ -37,7 +66,7 @@ class CourseOrderedListController extends GetxController {
       if (response.statusCode == 200) {
         print(jsonData);
         courseOrderListModel = CourseOrderListModel.fromJson(jsonData);
-          isLoading(false);
+        isLoading(false);
       }
       isLoading(false);
     } catch (e) {

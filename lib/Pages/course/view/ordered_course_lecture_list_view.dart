@@ -1,33 +1,74 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uniqueschool2024/Pages/course/controller/course_ordered_list_controller.dart';
-import 'package:uniqueschool2024/Pages/course/view/ordered_course_lecture_list_view.dart';
-import 'package:uniqueschool2024/Pages/profile/profile_page.dart';
-import 'package:uniqueschool2024/widgets/app_bar.dart';
+import 'package:uniqueschool2024/Pages/course/model/course_lecture_note_model.dart';
 
-class BuyCourseListView extends StatefulWidget {
-  const BuyCourseListView({super.key});
+import 'package:uniqueschool2024/Pages/course/view/buy_course_list_view.dart';
+import 'package:uniqueschool2024/Util/Localstorekey.dart';
+import 'package:uniqueschool2024/Util/app_constant.dart';
+import 'package:http/http.dart' as http;
+import 'package:uniqueschool2024/school/app_bar_widget.dart';
 
+class OrderedCourseLec extends StatefulWidget {
   @override
-  State<BuyCourseListView> createState() => _BuyCourseListViewState();
+  State<OrderedCourseLec> createState() => _OrderedCourseLecState();
 }
 
-class _BuyCourseListViewState extends State<BuyCourseListView> {
-  List<String> coursList = ["All", "Science", "Business Studies"];
-  var courseController = Get.put(CourseOrderedListController());
+class _OrderedCourseLecState extends State<OrderedCourseLec> {
+  var _box = GetStorage();
+
+  bool isLoading = false;
+ CourseLectureNoteModel? courseLectureNoteModel;
+  getCourseOrderLac() async {
+    var token = _box.read(LocalStoreKey.token);
+    try {
+      var mapData = {"course_id": '4'};
+      isLoading = true;
+      var response = await http.post(
+          Uri.parse(
+              "${AppConstants.baseUrl}${AppConstants.courseOrderlecture}"),
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + token,
+          },
+          body: mapData);
+      print("response ${response}");
+      print(response.statusCode);
+      var jsonData = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        print(jsonData);
+ courseLectureNoteModel = CourseLectureNoteModel.fromJson(jsonData);
+        setState(() {
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print("Error: $e");
+    }
+  }
+
+  void initState() {
+    super.initState();
+    getCourseOrderLac();
+  }
 
   @override
   Widget build(BuildContext context) {
+     
     return SafeArea(
         child: Scaffold(
       appBar: customAppBar("Courses", () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ProfilePage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => BuyCourseListView()));
       }),
-      body: Obx(() => courseController.isLoading.value == false
-              ? Container(
+      body: Container(
           margin: EdgeInsets.all(10.h),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -39,19 +80,18 @@ class _BuyCourseListViewState extends State<BuyCourseListView> {
                 end: Alignment.bottomCenter,
                 colors: [Color(0xffc3e6f9), Colors.white]),
           ),
-          child: ListView.builder(
-                  itemCount: courseController
-                      .courseOrderListModel!.data.courseOrders.length,
+          child: isLoading==false?ListView.builder(
+                  itemCount:  courseLectureNoteModel!.data.course.lecture!.length,
                   itemBuilder: (context, index) {
-                    var data = courseController
-                        .courseOrderListModel!.data.courseOrders;
+                    var data = 
+                        courseLectureNoteModel!.data.course.lecture![index];
                     return Container(
-                        height: 110.h,
+                      
                         margin: EdgeInsets.all(10.h),
                         decoration: BoxDecoration(),
                         child: InkWell(
                           onTap: () {
-                            Get.to(OrderedCourseLec());
+                          
                           },
                           child: Row(
                             children: [
@@ -69,7 +109,7 @@ class _BuyCourseListViewState extends State<BuyCourseListView> {
                                 ),
                               ),
                               Container(
-                                  height: 100.h,
+                                 
                                   width: 200.w,
                                   padding: EdgeInsets.only(
                                       left: 10.w, right: 10.w, top: 10.h),
@@ -87,7 +127,7 @@ class _BuyCourseListViewState extends State<BuyCourseListView> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            "${data[index].course.title}",
+                                            "${data.title}",
                                             style: GoogleFonts.publicSans(),
                                           ),
                                           Image.asset("assets/flag.png"),
@@ -95,52 +135,50 @@ class _BuyCourseListViewState extends State<BuyCourseListView> {
                                       ),
                                       Container(
                                         child: Text(
-                                          "Class 9 - Chemistry",
+                                        "${data.paper}",
                                           style: GoogleFonts.publicSans(),
                                           textAlign: TextAlign.left,
                                         ),
                                       ),
                                       Container(
                                         child: Text(
-                                          "7056/-",
+                                          "${data.chapter}",
                                           style: GoogleFonts.publicSans(
                                               fontWeight: FontWeight.w700),
                                           textAlign: TextAlign.left,
                                         ),
                                       ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Icon(
-                                            Icons.star,
-                                            color: Colors.yellow,
-                                          ),
-                                          Text(
-                                            ".3",
-                                            style: GoogleFonts.publicSans(),
-                                          ),
-                                          Text(
-                                            "|",
-                                            style: GoogleFonts.publicSans(
-                                                fontWeight: FontWeight.w900),
-                                          ),
-                                          Text(
-                                            "12000",
-                                            style: GoogleFonts.publicSans(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
+                                      // Row(
+                                      //   mainAxisAlignment:
+                                      //       MainAxisAlignment.spaceAround,
+                                      //   children: [
+                                      //     Icon(
+                                      //       Icons.star,
+                                      //       color: Colors.yellow,
+                                      //     ),
+                                      //     Text(
+                                      //       ".3",
+                                      //       style: GoogleFonts.publicSans(),
+                                      //     ),
+                                      //     Text(
+                                      //       "|",
+                                      //       style: GoogleFonts.publicSans(
+                                      //           fontWeight: FontWeight.w900),
+                                      //     ),
+                                      //     Text(
+                                      //       "12000",
+                                      //       style: GoogleFonts.publicSans(
+                                      //           fontWeight: FontWeight.bold),
+                                      //     ),
+                                      //   ],
+                                      // ),
                                     ],
                                   )),
                             ],
                           ),
                         ));
-                  })
-               ):Center(
-                  child: CircularProgressIndicator(),
-                )),
+                  }) :Center(child: CircularProgressIndicator(),)
+      )
     ));
   }
 }

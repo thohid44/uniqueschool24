@@ -16,7 +16,7 @@ class _CourseOverViewPageState extends State<CourseOverViewPage> {
   Widget build(BuildContext context) {
 return   SafeArea(
       child: Scaffold(
-        appBar: customAppBar("Team"),
+    //    appBar: customAppBar("Team"),
         body: ListView(
           children: [
             Container(

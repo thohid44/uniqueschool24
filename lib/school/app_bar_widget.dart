@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-AppBar customAppBar(title) {
+AppBar customAppBar(title, Null Function() param1) {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.white,

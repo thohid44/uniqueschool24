@@ -42,20 +42,20 @@ class Data {
 }
 
 class Course {
-    int id;
-    String title;
-    String facebookGroupLink;
-    String whatsappGroupLink;
-    List<Lecture> lecture;
-    List<Lecture> notes;
+    int? id;
+    String? title;
+    String? facebookGroupLink;
+    String? whatsappGroupLink;
+    List<Lecture>? lecture;
+    //List<Lecture>? notes;
 
     Course({
-        required this.id,
-        required this.title,
-        required this.facebookGroupLink,
-        required this.whatsappGroupLink,
-        required this.lecture,
-        required this.notes,
+         this.id,
+         this.title,
+         this.facebookGroupLink,
+         this.whatsappGroupLink,
+         this.lecture,
+       //  this.notes,
     });
 
     factory Course.fromJson(Map<String, dynamic> json) => Course(
@@ -64,30 +64,30 @@ class Course {
         facebookGroupLink: json["facebook_group_link"],
         whatsappGroupLink: json["whatsapp_group_link"],
         lecture: List<Lecture>.from(json["lecture"].map((x) => Lecture.fromJson(x))),
-        notes: List<Lecture>.from(json["notes"].map((x) => Lecture.fromJson(x))),
+       // notes: List<Lecture>.from(json["notes"].map((x) => Lecture.fromJson(x))),
     );
 
 }
 
 class Lecture {
-    int id;
-    String courseId;
-    String paper;
-    String chapter;
-    String title;
+    int? id;
+    String? courseId;
+    String? paper;
+    String? chapter;
+    String? title;
     String? videoUrl;
-    dynamic note;
-    String notePdf;
+    var note;
+    String? notePdf;
 
     Lecture({
-        required this.id,
-        required this.courseId,
-        required this.paper,
-        required this.chapter,
-        required this.title,
+         this.id,
+         this.courseId,
+         this.paper,
+         this.chapter,
+         this.title,
         this.videoUrl,
         this.note,
-        required this.notePdf,
+         this.notePdf,
     });
 
     factory Lecture.fromJson(Map<String, dynamic> json) => Lecture(
